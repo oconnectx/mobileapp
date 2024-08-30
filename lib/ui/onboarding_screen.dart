@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ocx/ui/wallet_screens/mnemonic_view.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -18,14 +19,23 @@ class OnboardingScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // ocx logo
                 _logoImage(size),
+
+                // background image
                 _backgroundImage(size),
                 Column(
                   children: [
-                    _createWalletButton(label: "Create wallet"),
+                    // create wallet button
+                    _createWalletButton(
+                      context: context,
+                      label: "Create wallet",
+                    ),
                     const SizedBox(
                       height: 8.0,
                     ),
+
+                    // import wallet button
                     _importWalletButton(label: "Import wallet"),
                   ],
                 )
@@ -35,6 +45,7 @@ class OnboardingScreen extends StatelessWidget {
         ));
   }
 
+  /// returns logo [Image] widget wrapped in [padding]
   _logoImage(Size size) {
     return Padding(
       padding: const EdgeInsets.only(
@@ -47,6 +58,7 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 
+  /// returns background [Image] widget wrapped in [padding]
   _backgroundImage(Size size) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 64.0),
@@ -57,14 +69,22 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 
-  _createWalletButton({required String label}) {
+  /// returns create wallet [TextButton] widget
+  _createWalletButton({required BuildContext context, required String label}) {
     return Row(
       children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MnemonicView(),
+                  ),
+                );
+              },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.indigoAccent[100],
                 shape: RoundedRectangleBorder(

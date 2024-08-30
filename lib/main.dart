@@ -19,11 +19,16 @@ class OCX extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
+            /// wallet bloc provider
             create: (context) => WalletBloc(
-                secureStorage: SecureStorage(),
-                walletService: EtherWalletService()),
+              secureStorage: SecureStorage(), // secure storage instance
+              walletService:
+                  EtherWalletService(), //ethereum wallet service instance
+            ),
           )
         ],
+
+        /// app wrapper
         child: const AppWrapper(),
       ),
     );
